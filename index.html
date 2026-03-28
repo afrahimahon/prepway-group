@@ -3,54 +3,627 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
-<title>Prepway Group</title>
-<meta name="description" content="Prepway Group is the parent organisation behind Prepway Bangladesh and Prepway Abroad — working toward excellence in education for students from Bangladesh and beyond."/>
-<meta name="keywords" content="Prepway Group, Prepway Bangladesh, Prepway Abroad, Bangladesh education, global education, student guidance, EdTech Bangladesh"/>
+<title>Prepway Group — Building Trust for a Better Tomorrow</title>
+<meta name="description" content="Prepway Group is the parent organisation behind Prepway Bangladesh and Prepway Abroad — building trust for a better tomorrow in education."/>
+<meta name="keywords" content="Prepway Group, Prepway Bangladesh, Prepway Abroad, Bangladesh education, global education"/>
 <meta name="author" content="Prepway Group"/>
 <meta name="robots" content="index, follow"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Prepway Group — Building Trust for a Better Tomorrow"/>
-<meta property="og:description" content="The parent organisation behind Prepway Bangladesh and Prepway Abroad. One vision — excellence in education, from Bangladesh to the world."/>
+<meta property="og:description" content="One group. Two platforms. Building trust for a better tomorrow."/>
 <meta property="og:url" content="https://prepwaygroup.vercel.app/"/>
-<meta property="og:site_name" content="Prepway Group"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Prepway Group — Excellence in Education"/>
-<meta name="twitter:description" content="One group. Two platforms. One vision — empowering every Bangladeshi student."/>
 <meta name="theme-color" content="#0D0D0D"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300..800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css"/>
+<style>
+/* ═══════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  --ink:      #0D0D0D;
+  --ink-2:    #1A1A1A;
+  --ink-3:    #2E2E2E;
+  --paper:    #F7F5F2;
+  --paper-2:  #EFEDE9;
+  --paper-3:  #E5E3DF;
+  --white:    #FFFFFF;
+  --mid:      #8A8780;
+  --mid-2:    #C0BEB9;
+  --border:   rgba(13,13,13,.10);
+  --border-2: rgba(13,13,13,.18);
+
+  /* Prepway Bangladesh — red from logo */
+  --bd:    #E52030;
+  --bd-s:  rgba(229,32,48,.07);
+  --bd-m:  rgba(229,32,48,.14);
+  --bd-b:  rgba(229,32,48,.24);
+
+  /* Prepway Abroad — dark green from logo */
+  --ab:    #1A6B1A;
+  --ab-s:  rgba(26,107,26,.07);
+  --ab-m:  rgba(26,107,26,.14);
+  --ab-b:  rgba(26,107,26,.24);
+
+  --spring:   cubic-bezier(.34,1.56,.64,1);
+  --ease-out: cubic-bezier(.22,1,.36,1);
+  --f-d: "Cormorant Garamond", Georgia, serif;
+  --f-m: "IBM Plex Mono", monospace;
+  --f-b: "Plus Jakarta Sans", sans-serif;
+}
+
+/* ═══ RESET ═══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--f-b);background:var(--paper);color:var(--ink);min-height:100vh;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+img{max-width:100%;display:block}
+
+/* ═══ LAYOUT ═══ */
+.wrap{max-width:1200px;margin:0 auto;padding:0 3rem}
+.section{padding:7rem 0;position:relative;z-index:1}
+.divider{height:1px;background:var(--border)}
+
+/* ═══ NOISE + GRID ═══ */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+}
+.bg-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(13,13,13,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(13,13,13,.04) 1px,transparent 1px);
+  background-size:64px 64px;
+  animation:gridDrift 60s linear infinite;
+}
+@keyframes gridDrift{to{background-position:64px 64px}}
+
+.float-mark{
+  position:fixed;z-index:0;pointer-events:none;
+  font-family:var(--f-m);font-size:.60rem;color:var(--ink);
+  opacity:.055;letter-spacing:.1em;text-transform:uppercase;
+  animation:floatUp var(--dur,28s) ease-in-out infinite alternate;
+  white-space:nowrap;
+}
+@keyframes floatUp{
+  0%{transform:translateY(0) rotate(var(--rot,0deg))}
+  100%{transform:translateY(var(--dy,-20px)) rotate(var(--rot2,1deg))}
+}
+
+/* ═══ SCROLL REVEAL ═══ */
+.rev{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.rev.on{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+/* ═══ NAV ═══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:600;height:66px;
+  border-bottom:1px solid transparent;
+  transition:background .4s,border-color .4s,box-shadow .4s;
+}
+nav.scrolled{
+  background:rgba(247,245,242,.96);
+  backdrop-filter:blur(20px) saturate(140%);
+  -webkit-backdrop-filter:blur(20px) saturate(140%);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 1px 0 var(--border);
+}
+.nav-inner{
+  max-width:1200px;margin:0 auto;padding:0 3rem;
+  height:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+}
+.nav-logo{display:flex;align-items:center;gap:.3rem;flex-shrink:0}
+.nav-lp{
+  font-family:var(--f-m);font-size:1.28rem;font-weight:700;
+  letter-spacing:-.02em;color:var(--ink);line-height:1;
+}
+.nav-lg{
+  font-family:var(--f-m);font-size:.50rem;font-weight:500;
+  letter-spacing:.22em;color:var(--mid);text-transform:uppercase;
+  border:1px solid var(--border-2);border-radius:4px;
+  padding:.12rem .4rem;position:relative;top:-1px;
+}
+.nav-beta{
+  font-family:var(--f-m);font-size:.46rem;font-weight:700;
+  letter-spacing:.14em;color:#fff;background:var(--ink);
+  text-transform:uppercase;border-radius:4px;
+  padding:.14rem .46rem;position:relative;top:-1px;
+  box-shadow:0 2px 8px rgba(13,13,13,.20);
+}
+.nav-links{display:flex;align-items:center;gap:.2rem;list-style:none}
+.nav-links a{
+  font-family:var(--f-m);font-size:.68rem;font-weight:500;color:var(--ink-3);
+  padding:.44rem .82rem;border-radius:8px;letter-spacing:.04em;
+  transition:color .2s,background .2s;
+}
+.nav-links a:hover{color:var(--ink);background:var(--paper-2)}
+.mob-btn{
+  display:none;width:38px;height:38px;border-radius:8px;
+  border:1px solid var(--border-2);background:var(--paper-2);
+  color:var(--ink-3);align-items:center;justify-content:center;
+  transition:color .2s;
+}
+.mob-btn:hover{color:var(--ink)}
+
+/* ═══ MOBILE DRAWER ═══ */
+.mob-nav{
+  display:none;position:fixed;top:66px;left:0;right:0;z-index:590;
+  background:rgba(247,245,242,.97);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:1.2rem 1.5rem 1.5rem;
+  transform:translateY(-8px);opacity:0;
+  transition:transform .3s var(--ease-out),opacity .3s;
+}
+.mob-nav.open{transform:none;opacity:1}
+.mob-nav ul{list-style:none;margin-bottom:1rem}
+.mob-nav ul li a{
+  display:block;padding:.75rem 0;
+  font-family:var(--f-m);font-size:.80rem;color:var(--ink-3);
+  border-bottom:1px solid var(--border);
+  transition:color .2s;
+}
+.mob-nav ul li a:hover{color:var(--ink)}
+.mob-cta{
+  display:inline-flex;align-items:center;
+  font-family:var(--f-m);font-size:.72rem;font-weight:700;
+  color:var(--paper);background:var(--ink);
+  padding:.72rem 1.6rem;border-radius:100px;
+  letter-spacing:.05em;margin-top:.6rem;
+  transition:transform .25s var(--spring);
+}
+.mob-cta:hover{transform:translateY(-2px)}
+
+/* ═══ HERO ═══ */
+#hero{
+  min-height:100vh;display:grid;place-items:center;
+  position:relative;z-index:1;padding-top:66px;overflow:hidden;
+}
+.hero-content{position:relative;z-index:1;text-align:center}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--f-m);font-size:.60rem;font-weight:600;
+  color:var(--mid);letter-spacing:.18em;text-transform:uppercase;
+  border:1px solid var(--border-2);border-radius:100px;
+  padding:.38rem 1rem;margin-bottom:2rem;
+  background:var(--paper-2);
+  animation:fadeIn .8s var(--ease-out) .2s both;
+}
+.hero-tag::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--ink);animation:dot 2s ease-in-out infinite;
+}
+@keyframes dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.65)}}
+.hero-h1{
+  font-family:var(--f-d);
+  font-size:clamp(3.2rem,8vw,7.5rem);
+  font-weight:700;line-height:1.02;letter-spacing:-.03em;
+  color:var(--ink);margin-bottom:1.8rem;
+  animation:slideUp .9s var(--ease-out) .35s both;
+}
+.hero-h1 em{font-style:italic;color:var(--mid)}
+.hero-sub{
+  font-family:var(--f-b);
+  font-size:clamp(.95rem,1.6vw,1.1rem);
+  color:var(--mid);line-height:1.78;max-width:560px;
+  margin:0 auto 2.8rem;
+  animation:slideUp .9s var(--ease-out) .5s both;
+}
+.hero-btns{
+  display:flex;align-items:center;gap:1rem;justify-content:center;flex-wrap:wrap;
+  animation:slideUp .9s var(--ease-out) .65s both;
+}
+.btn-black{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--f-m);font-size:.72rem;font-weight:700;
+  color:var(--paper);background:var(--ink);
+  padding:.85rem 2rem;border-radius:100px;letter-spacing:.06em;
+  transition:transform .28s var(--spring),box-shadow .28s;
+  box-shadow:0 4px 24px rgba(13,13,13,.22);
+}
+.btn-black:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 10px 32px rgba(13,13,13,.28)}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--f-m);font-size:.72rem;font-weight:600;
+  color:var(--ink-3);background:transparent;
+  padding:.85rem 2rem;border-radius:100px;letter-spacing:.06em;
+  border:1px solid var(--border-2);
+  transition:color .2s,border-color .2s,background .2s,transform .25s var(--spring);
+}
+.btn-outline:hover{color:var(--ink);border-color:var(--ink);background:var(--paper-2);transform:translateY(-2px)}
+.hero-scroll{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  animation:fadeIn 1s var(--ease-out) 1.2s both;
+}
+.hero-scroll span{
+  font-family:var(--f-m);font-size:.56rem;font-weight:600;
+  color:var(--mid-2);letter-spacing:.14em;text-transform:uppercase;
+}
+.scroll-line{
+  width:1px;height:48px;background:linear-gradient(to bottom,var(--mid-2),transparent);
+  animation:scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine{
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  51%{transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* ═══ STATS ═══ */
+#stats{position:relative;z-index:1;background:var(--ink);padding:2.8rem 0}
+.stat-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(255,255,255,.12);
+}
+.stat-item{text-align:center;padding:2.2rem 1.5rem;background:var(--ink)}
+.stat-n{
+  font-family:var(--f-d);
+  font-size:clamp(2.2rem,4vw,3.5rem);
+  font-weight:700;color:var(--white);letter-spacing:-.03em;margin-bottom:.35rem;
+}
+.stat-l{
+  font-family:var(--f-m);font-size:.58rem;font-weight:600;
+  color:rgba(255,255,255,.45);letter-spacing:.16em;text-transform:uppercase;
+}
+
+/* ═══ VISION ═══ */
+#vision{background:var(--paper);overflow:hidden}
+.vision-inner{
+  display:grid;grid-template-columns:1fr 1.2fr;gap:6rem;align-items:center;
+}
+.vision-eyebrow{
+  font-family:var(--f-m);font-size:.60rem;font-weight:700;
+  color:var(--mid);letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:1.4rem;display:flex;align-items:center;gap:.6rem;
+}
+.vision-eyebrow::before{content:'01';color:var(--mid-2)}
+.vision-h2{
+  font-family:var(--f-d);
+  font-size:clamp(2.2rem,4vw,3.4rem);
+  font-weight:700;line-height:1.12;letter-spacing:-.025em;
+  color:var(--ink);margin-bottom:1.6rem;
+}
+.vision-h2 em{font-style:italic;color:var(--mid)}
+.vision-p{
+  font-family:var(--f-b);font-size:.97rem;color:var(--mid);
+  line-height:1.85;margin-bottom:1.2rem;
+}
+.vision-pillars{margin-top:2.5rem;display:flex;flex-direction:column;gap:.75rem}
+.pillar{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:1.1rem 1.3rem;border:1px solid var(--border);border-radius:12px;
+  background:var(--paper-2);
+  transition:border-color .25s,background .25s,transform .25s var(--spring);
+}
+.pillar:hover{border-color:var(--border-2);background:var(--paper-3);transform:translateX(4px)}
+.pillar-num{
+  font-family:var(--f-m);font-size:.58rem;font-weight:700;
+  color:var(--mid-2);letter-spacing:.1em;flex-shrink:0;padding-top:.15rem;
+}
+.pillar-body h4{
+  font-family:var(--f-m);font-size:.72rem;font-weight:700;
+  color:var(--ink);margin-bottom:.28rem;letter-spacing:.03em;
+}
+.pillar-body p{font-size:.85rem;color:var(--mid);line-height:1.6}
+
+/* ── Orbital graphic (SVG-based, perfectly responsive) ── */
+.vision-graphic{
+  position:relative;width:100%;max-width:480px;
+  display:flex;align-items:center;justify-content:center;
+}
+.vg-wrap{
+  position:relative;width:100%;aspect-ratio:1;
+  display:flex;align-items:center;justify-content:center;
+}
+.vg-svg{
+  position:absolute;inset:0;width:100%;height:100%;overflow:visible;
+}
+/* Each ring group rotates around the SVG centre (200,200) */
+.svg-ring{transform-origin:200px 200px}
+.r1{animation:svgRot 60s linear infinite}
+.r2{animation:svgRot 42s linear infinite reverse}
+.r3{animation:svgRot 30s linear infinite}
+.r4{animation:svgRot 22s linear infinite reverse}
+@keyframes svgRot{to{transform:rotate(360deg)}}
+/* Centre nucleus */
+.vg-center{
+  position:relative;z-index:2;
+  width:40%;aspect-ratio:1;border-radius:50%;
+  background:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:6%;
+}
+.vg-ct{
+  font-family:var(--f-d);font-size:clamp(.75rem,2vw,1.3rem);
+  font-weight:700;color:#fff;line-height:1.15;
+}
+.vg-cs{
+  font-family:var(--f-m);font-size:clamp(.32rem,.8vw,.44rem);
+  font-weight:600;color:rgba(255,255,255,.45);
+  letter-spacing:.12em;text-transform:uppercase;margin-top:.35rem;
+}
+
+/* ═══ SUBSIDIARIES ═══ */
+#subsidiaries{background:var(--paper-2)}
+.sub-eyebrow{
+  font-family:var(--f-m);font-size:.60rem;font-weight:700;
+  color:var(--mid);letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem;
+}
+.sub-eyebrow::before{content:'02';color:var(--mid-2)}
+.sub-h2{
+  font-family:var(--f-d);font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:700;letter-spacing:-.025em;color:var(--ink);margin-bottom:1rem;
+}
+.sub-intro{
+  font-family:var(--f-b);font-size:.97rem;color:var(--mid);
+  line-height:1.78;max-width:500px;margin-bottom:3.5rem;
+}
+.sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.sub-card{
+  border-radius:20px;background:var(--paper);padding:2.5rem;
+  border:1.5px solid var(--border);
+  position:relative;overflow:hidden;
+  transition:border-color .28s,transform .32s var(--spring),box-shadow .32s;
+}
+.sub-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(13,13,13,.10)}
+.sub-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--ink);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--ease-out);
+}
+.sub-card:hover::before{transform:scaleX(1)}
+
+/* Bangladesh tint */
+.sub-bd{border-color:var(--bd-b);background:var(--bd-s)}
+.sub-bd:hover{border-color:var(--bd);box-shadow:0 20px 48px rgba(229,32,48,.12)}
+.sub-bd::before{background:var(--bd)}
+.sub-bd .sub-badge{color:var(--bd);border-color:var(--bd-b);background:rgba(229,32,48,.06)}
+.sub-bd .sub-badge-dot{background:var(--bd)}
+.sub-bd .sub-name em{color:var(--bd)}
+.sub-bd .sub-link{background:var(--bd);color:#fff}
+.sub-bd .sub-link:hover{box-shadow:0 6px 20px rgba(229,32,48,.30)}
+.sub-bd .sub-tag{color:var(--bd);border-color:var(--bd-b);background:rgba(229,32,48,.05)}
+
+/* Abroad tint */
+.sub-ab{border-color:var(--ab-b);background:var(--ab-s)}
+.sub-ab:hover{border-color:var(--ab);box-shadow:0 20px 48px rgba(26,107,26,.12)}
+.sub-ab::before{background:var(--ab)}
+.sub-ab .sub-badge{color:var(--ab);border-color:var(--ab-b);background:rgba(26,107,26,.06)}
+.sub-ab .sub-badge-dot{background:var(--ab)}
+.sub-ab .sub-name em{color:var(--ab)}
+.sub-ab .sub-link{background:var(--ab);color:#fff}
+.sub-ab .sub-link:hover{box-shadow:0 6px 20px rgba(26,107,26,.30)}
+.sub-ab .sub-tag{color:var(--ab);border-color:var(--ab-b);background:rgba(26,107,26,.05)}
+
+.sub-badge{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-family:var(--f-m);font-size:.55rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--border-2);border-radius:100px;
+  padding:.28rem .72rem;margin-bottom:1.8rem;
+}
+.sub-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--ink)}
+.sub-name{
+  font-family:var(--f-d);font-size:clamp(1.7rem,2.8vw,2.3rem);
+  font-weight:700;color:var(--ink);letter-spacing:-.02em;
+  margin-bottom:1rem;line-height:1.15;
+}
+.sub-name em{font-style:italic}
+.sub-desc{
+  font-family:var(--f-b);font-size:.91rem;color:var(--mid);
+  line-height:1.80;margin-bottom:1.8rem;
+}
+.sub-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:2rem}
+.sub-tag{
+  font-family:var(--f-m);font-size:.58rem;font-weight:600;
+  color:var(--ink-3);background:var(--paper-2);
+  border:1px solid var(--border);border-radius:100px;
+  padding:.28rem .72rem;letter-spacing:.04em;
+}
+.sub-est{
+  font-family:var(--f-m);font-size:.58rem;font-weight:600;
+  color:var(--mid-2);letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+.sub-link{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--f-m);font-size:.68rem;font-weight:700;
+  color:var(--paper);background:var(--ink);
+  padding:.7rem 1.4rem;border-radius:100px;letter-spacing:.05em;
+  transition:transform .25s var(--spring),box-shadow .25s;
+}
+.sub-link:hover{transform:translateX(4px)}
+.sub-link svg{transition:transform .25s var(--spring)}
+.sub-link:hover svg{transform:translateX(3px)}
+
+/* ═══ FOUNDERS ═══ */
+#founders{background:var(--ink)}
+.founders-eyebrow{
+  font-family:var(--f-m);font-size:.60rem;font-weight:700;
+  color:rgba(255,255,255,.35);letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem;
+}
+.founders-eyebrow::before{content:'03';color:rgba(255,255,255,.18)}
+.founders-h2{
+  font-family:var(--f-d);font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:700;letter-spacing:-.025em;color:#fff;margin-bottom:1rem;
+}
+.founders-h2 em{font-style:italic;color:rgba(255,255,255,.50)}
+.founders-sub{
+  font-family:var(--f-b);font-size:.97rem;
+  color:rgba(255,255,255,.42);line-height:1.78;max-width:480px;
+  margin-bottom:3.5rem;
+}
+.founders-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:rgba(255,255,255,.08);
+}
+.founder-card{
+  background:var(--ink);padding:2.2rem 1.8rem;
+  transition:background .25s;
+}
+.founder-card:hover{background:var(--ink-2)}
+.founder-num{
+  font-family:var(--f-m);font-size:.52rem;font-weight:600;
+  color:rgba(255,255,255,.22);letter-spacing:.14em;margin-bottom:1.4rem;
+}
+.founder-name{
+  font-family:var(--f-d);font-size:1.22rem;font-weight:700;
+  color:#fff;letter-spacing:-.01em;margin-bottom:.45rem;line-height:1.2;
+}
+.founder-role{
+  font-family:var(--f-m);font-size:.58rem;font-weight:600;
+  color:rgba(255,255,255,.38);letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.founder-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.founder-tag{
+  font-family:var(--f-m);font-size:.53rem;font-weight:600;
+  color:rgba(255,255,255,.32);border:1px solid rgba(255,255,255,.10);
+  border-radius:4px;padding:.18rem .45rem;letter-spacing:.05em;
+}
+.ftag-bd{color:rgba(229,32,48,.9)!important;border-color:rgba(229,32,48,.28)!important;background:rgba(229,32,48,.10)!important}
+.ftag-ab{color:rgba(56,168,56,.9)!important;border-color:rgba(56,168,56,.28)!important;background:rgba(56,168,56,.10)!important}
+
+/* ═══ MISSION ═══ */
+#mission{background:var(--paper);text-align:center;overflow:hidden}
+.mission-inner{position:relative;z-index:1}
+.mission-eyebrow{
+  font-family:var(--f-m);font-size:.60rem;font-weight:700;
+  color:var(--mid);letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:1.4rem;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+}
+.mission-eyebrow::before{content:'04';color:var(--mid-2)}
+.mission-quote{
+  font-family:var(--f-d);font-size:clamp(1.8rem,4.5vw,4rem);
+  font-weight:700;line-height:1.15;letter-spacing:-.03em;
+  color:var(--ink);max-width:900px;margin:0 auto 2.5rem;
+}
+.mission-quote em{font-style:italic;color:var(--mid)}
+.mission-sub{
+  font-family:var(--f-b);font-size:.97rem;color:var(--mid);
+  line-height:1.85;max-width:600px;margin:0 auto 3rem;
+}
+.mission-cta{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-family:var(--f-m);font-size:.70rem;font-weight:700;
+  color:var(--paper);background:var(--ink);
+  padding:1rem 2.4rem;border-radius:100px;letter-spacing:.07em;
+  transition:transform .28s var(--spring),box-shadow .28s;
+  box-shadow:0 4px 24px rgba(13,13,13,.18);
+}
+.mission-cta:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 12px 36px rgba(13,13,13,.24)}
+
+/* ═══ FOOTER ═══ */
+footer{
+  background:var(--ink-2);border-top:1px solid rgba(255,255,255,.06);
+  padding:3.5rem 0 2rem;position:relative;z-index:1;
+}
+.ft-inner{max-width:1200px;margin:0 auto;padding:0 3rem}
+.ft-top{
+  display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:3rem;
+  margin-bottom:3rem;padding-bottom:3rem;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.ft-logo{
+  font-family:var(--f-d);font-size:1.5rem;font-weight:700;
+  color:#fff;letter-spacing:-.02em;margin-bottom:.5rem;
+}
+.ft-slogan{
+  font-family:var(--f-b);font-size:.85rem;
+  color:rgba(255,255,255,.38);line-height:1.72;margin-bottom:.5rem;font-style:italic;
+}
+.ft-tagline{
+  font-family:var(--f-b);font-size:.82rem;
+  color:rgba(255,255,255,.28);line-height:1.68;margin-bottom:1.2rem;
+}
+.ft-col-title{
+  font-family:var(--f-m);font-size:.58rem;font-weight:700;
+  color:rgba(255,255,255,.30);letter-spacing:.16em;text-transform:uppercase;
+  margin-bottom:1.2rem;
+}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.ft-links a{
+  font-family:var(--f-b);font-size:.84rem;
+  color:rgba(255,255,255,.45);transition:color .2s;
+}
+.ft-links a:hover{color:rgba(255,255,255,.85)}
+.ft-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:.75rem;
+}
+.ft-copy{font-family:var(--f-m);font-size:.58rem;color:rgba(255,255,255,.25);letter-spacing:.06em}
+.ft-subs{
+  display:flex;gap:.75rem;align-items:center;
+  font-family:var(--f-m);font-size:.58rem;color:rgba(255,255,255,.25);letter-spacing:.06em;
+}
+.ft-subs a{color:rgba(255,255,255,.42);transition:color .2s}
+.ft-subs a:hover{color:rgba(255,255,255,.80)}
+.ft-subs span{color:rgba(255,255,255,.14)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .wrap,.nav-inner,.ft-inner{padding-left:2rem;padding-right:2rem}
+  .vision-inner{grid-template-columns:1fr;gap:4rem}
+  .vision-graphic{max-width:320px;margin:0 auto}
+  .sub-grid{grid-template-columns:1fr}
+  .founders-grid{grid-template-columns:repeat(2,1fr)}
+  .stat-grid{grid-template-columns:repeat(3,1fr)}
+  .ft-top{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+}
+@media(max-width:768px){
+  .wrap,.nav-inner,.ft-inner{padding-left:1.25rem;padding-right:1.25rem}
+  .section{padding:5rem 0}
+  .mob-btn{display:flex}
+  .hero-h1{font-size:clamp(2.6rem,10vw,4.2rem)}
+  .founders-grid{grid-template-columns:repeat(2,1fr)}
+  .stat-grid{grid-template-columns:repeat(3,1fr)}
+  .ft-top{grid-template-columns:1fr;gap:2rem}
+  .ft-bottom{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:520px){
+  .stat-grid{grid-template-columns:1fr}
+  .founders-grid{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column;align-items:stretch}
+  .btn-black,.btn-outline{justify-content:center}
+  .vision-graphic{max-width:260px}
+}
+</style>
 </head>
 <body>
 
-<!-- ═══ BACKGROUND ═══ -->
 <div class="bg-grid" aria-hidden="true"></div>
-<div class="float-mark" style="top:22%;left:2%;--dur:32s;--rot:-6deg;--dy:-22px;--rot2:-5deg">EXCELLENCE · EDUCATION · IMPACT</div>
-<div class="float-mark" style="top:55%;right:3%;--dur:26s;--rot:4deg;--dy:-18px;--rot2:5deg">BANGLADESH · GLOBAL · 2025</div>
-<div class="float-mark" style="bottom:30%;left:5%;--dur:38s;--rot:2deg;--dy:-26px;--rot2:3deg">PREPWAY GROUP · EST. 2025</div>
+<div class="float-mark" style="top:20%;left:2%;--dur:32s;--rot:-6deg;--dy:-22px;--rot2:-5deg">EXCELLENCE · EDUCATION · IMPACT</div>
+<div class="float-mark" style="top:52%;right:3%;--dur:26s;--rot:4deg;--dy:-18px;--rot2:5deg">BANGLADESH · GLOBAL · 2025</div>
+<div class="float-mark" style="bottom:28%;left:5%;--dur:38s;--rot:2deg;--dy:-26px;--rot2:3deg">PREPWAY GROUP · EST. 2025</div>
 
 <!-- ═══ NAV ═══ -->
 <nav id="mainNav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="#" class="nav-logo" aria-label="Prepway Group — Home">
-      <span class="nav-logo-p">prepway</span>
-      <span class="nav-logo-g">GROUP</span>
-      <span class="nav-logo-g">BETA</span>
+      <span class="nav-lp">prepway</span>
+      <span class="nav-lg">GROUP</span>
+      <span class="nav-beta">BETA · Early Access</span>
     </a>
-
     <ul class="nav-links" role="list">
       <li><a href="#vision">Vision</a></li>
       <li><a href="#subsidiaries">Platforms</a></li>
       <li><a href="#founders">Founders</a></li>
       <li><a href="#mission">Mission</a></li>
-      <li><a href="https://prepwaybd.vercel.app" target="_blank" rel="noopener" class="nav-cta">Prepway BD →</a></li>
     </ul>
-
-    <button class="mob-btn" id="mbtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+    <button class="mob-btn" id="mbtn" aria-label="Open menu" aria-expanded="false">
       <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
-        <rect y="0"  width="18" height="2" rx="1" fill="currentColor"/>
-        <rect y="6"  width="18" height="2" rx="1" fill="currentColor"/>
+        <rect y="0" width="18" height="2" rx="1" fill="currentColor"/>
+        <rect y="6" width="18" height="2" rx="1" fill="currentColor"/>
         <rect y="12" width="18" height="2" rx="1" fill="currentColor"/>
       </svg>
     </button>
@@ -58,30 +631,27 @@
 </nav>
 
 <!-- ═══ MOBILE DRAWER ═══ -->
-<div class="mob-nav" id="mobileNav" style="display:none" aria-label="Mobile navigation" aria-hidden="true">
+<div class="mob-nav" id="mobileNav" aria-hidden="true">
   <ul>
     <li><a href="#vision">Vision</a></li>
     <li><a href="#subsidiaries">Platforms</a></li>
     <li><a href="#founders">Founders</a></li>
     <li><a href="#mission">Mission</a></li>
   </ul>
-  <a href="https://prepwaybd.vercel.app" target="_blank" rel="noopener" class="mob-cta">Visit Prepway BD →</a>
+  <a href="#subsidiaries" class="mob-cta">Explore Platforms →</a>
 </div>
 
 <main>
 
 <!-- ═══ HERO ═══ -->
 <section id="hero" aria-label="Hero">
-
-  <div class="hero-content container" style="width:100%">
-    <div class="hero-tag">
-      <span>Est. 2025</span>
-    </div>
+  <div class="hero-content wrap" style="width:100%">
+    <div class="hero-tag">Est. 2025 · Dhaka, Bangladesh</div>
     <h1 class="hero-h1">
       Building Trust<br>for a <em>Better Tomorrow</em>
     </h1>
     <p class="hero-sub">
-      One group. Two platforms. Focusing for Bangladesh and overseas.
+      One group. Two platforms. A shared mission to guide every Bangladeshi student — from home classrooms to universities around the world.
     </p>
     <div class="hero-btns">
       <a href="#subsidiaries" class="btn-black">
@@ -91,7 +661,6 @@
       <a href="#mission" class="btn-outline">Our Mission</a>
     </div>
   </div>
-
   <div class="hero-scroll" aria-hidden="true">
     <span>Scroll</span>
     <div class="scroll-line"></div>
@@ -100,22 +669,18 @@
 
 <!-- ═══ STATS ═══ -->
 <section id="stats" aria-label="Key figures">
-  <div class="container">
+  <div class="wrap">
     <div class="stat-grid">
       <div class="stat-item rev">
-        <div class="stat-n" data-target="2" data-suffix="">2</div>
-        <div class="stat-l">Educational Platforms</div>
+        <div class="stat-n" data-target="2">2</div>
+        <div class="stat-l">Subsidiaries</div>
       </div>
       <div class="stat-item rev d1">
-        <div class="stat-n" data-target="4" data-suffix="">4</div>
+        <div class="stat-n" data-target="4">4</div>
         <div class="stat-l">Founding Members</div>
       </div>
       <div class="stat-item rev d2">
-        <div class="stat-n" data-target="3" data-suffix="">3</div>
-        <div class="stat-l">Podcast Episodes (S01)</div>
-      </div>
-      <div class="stat-item rev d3">
-        <div class="stat-n" data-target="2025" data-suffix="">2025</div>
+        <div class="stat-n" data-target="2025">2025</div>
         <div class="stat-l">Year Founded</div>
       </div>
     </div>
@@ -126,16 +691,13 @@
 
 <!-- ═══ VISION ═══ -->
 <section class="section" id="vision" aria-label="Vision">
-  <div class="container">
+  <div class="wrap">
     <div class="vision-inner">
       <div>
         <div class="vision-eyebrow rev">Vision</div>
-        <h2 class="vision-h2 rev">
-          Built for<br><em>Impact</em>, Not<br>Just Content.
-        </h2>
+        <h2 class="vision-h2 rev">Built for<br><em>Impact</em>, Not<br>Just Content.</h2>
         <p class="vision-p rev">Prepway Group was not built to produce videos. It was built to change outcomes — to give every Bangladeshi student access to guidance that was once available only to a privileged few.</p>
         <p class="vision-p rev">We work across two distinct fronts: domestic education from SSC to university admission, and global pathways for Bangladeshi students pursuing opportunities abroad.</p>
-
         <div class="vision-pillars">
           <div class="pillar rev d1">
             <span class="pillar-num">01</span>
@@ -161,17 +723,32 @@
         </div>
       </div>
 
-      <div class="vision-graphic rev">
-        <div class="vg-ring"><div class="vg-dot"></div></div>
-        <div class="vg-ring">
-          <div class="vg-dot" style="top:auto;bottom:-4px;left:calc(50% - 4px)"></div>
-        </div>
-        <div class="vg-ring"><div class="vg-dot" style="top:auto;right:-4px;left:auto;top:calc(50% - 4px)"></div></div>
-        <div class="vg-ring"></div>
-        <div class="vg-center">
-          <div class="vg-center-t">prepway Group</div>
-          <div class="vg-center-s">Prepway Bangladesh</div>
-          <div class="vg-center-s">Prepway Abroad</div>
+      <!-- Fully responsive SVG orbital graphic -->
+      <div class="vision-graphic rev" aria-hidden="true">
+        <div class="vg-wrap">
+          <svg class="vg-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <g class="svg-ring r1">
+              <circle cx="200" cy="200" r="188" fill="none" stroke="rgba(13,13,13,.09)" stroke-width="1"/>
+              <circle cx="200" cy="12" r="5" fill="#0D0D0D"/>
+            </g>
+            <g class="svg-ring r2">
+              <circle cx="200" cy="200" r="146" fill="none" stroke="rgba(13,13,13,.11)" stroke-width="1"/>
+              <circle cx="200" cy="54" r="4.5" fill="#0D0D0D"/>
+            </g>
+            <g class="svg-ring r3">
+              <circle cx="200" cy="200" r="104" fill="none" stroke="rgba(13,13,13,.15)" stroke-width="1.2"/>
+              <circle cx="200" cy="96" r="4" fill="#0D0D0D"/>
+            </g>
+            <g class="svg-ring r4">
+              <circle cx="200" cy="200" r="62" fill="none" stroke="rgba(13,13,13,.13)" stroke-width="1"/>
+              <circle cx="200" cy="138" r="3" fill="#0D0D0D"/>
+            </g>
+          </svg>
+          <div class="vg-center">
+            <div class="vg-ct">prepway<br>Group</div>
+            <div class="vg-cs">Prepway Bangladesh</div>
+            <div class="vg-cs">Prepway Abroad</div>
+          </div>
         </div>
       </div>
     </div>
@@ -182,23 +759,20 @@
 
 <!-- ═══ SUBSIDIARIES ═══ -->
 <section class="section" id="subsidiaries" aria-label="Our Platforms">
-  <div class="container">
+  <div class="wrap">
     <div class="sub-eyebrow rev">Our Platforms</div>
     <h2 class="sub-h2 rev">Two Platforms.<br>One <em>Purpose.</em></h2>
     <p class="sub-intro rev">Each subsidiary was built to serve a distinct but connected need — together, they form a complete ecosystem for Bangladeshi student success.</p>
 
     <div class="sub-grid">
-
-      <!-- Prepway Bangladesh -->
-      <div class="sub-card sub-card-bd rev">
+      <!-- Prepway Bangladesh — red brand -->
+      <div class="sub-card sub-bd rev">
         <div class="sub-badge">
           <span class="sub-badge-dot"></span>
-          Bangladesh · Est. Aug 9, 2025
+          Est. Aug 9, 2025
         </div>
         <h3 class="sub-name">Prepway<br><em>Bangladesh</em></h3>
-        <p class="sub-desc">
-          An educational platform serving millions of Bangladeshi students navigating SSC, HSC, and university admissions — featuring the <strong>Show Your Voice</strong> podcast, analysis of the Bangladeshi educational landscape, and upcoming academic courses.
-        </p>
+        <p class="sub-desc">An educational platform serving Bangladeshi students navigating SSC, HSC, and university admissions — featuring the <strong>Show Your Voice</strong> podcast, analysis of the educational landscape, and upcoming academic courses.</p>
         <div class="sub-tags">
           <span class="sub-tag">SSC &amp; HSC</span>
           <span class="sub-tag">University Admission</span>
@@ -206,23 +780,21 @@
           <span class="sub-tag">Medical Prep</span>
           <span class="sub-tag">YouTube</span>
         </div>
-        <div class="sub-est">Youtube · Facebook · Telegram · Instagram</div>
+        <div class="sub-est">YouTube · Facebook · Telegram · Instagram</div>
         <a href="https://prepwaybd.vercel.app" target="_blank" rel="noopener" class="sub-link">
           Visit Platform
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
 
-      <!-- Prepway Abroad -->
-      <div class="sub-card rev d1">
+      <!-- Prepway Abroad — green brand -->
+      <div class="sub-card sub-ab rev d1">
         <div class="sub-badge">
           <span class="sub-badge-dot"></span>
-          Global · Est. Jun 26, 2025
+          Est. Jun 26, 2025
         </div>
         <h3 class="sub-name">Prepway<br><em>Abroad</em></h3>
-        <p class="sub-desc">
-          A podcast and content platform for Bangladeshi students aspiring to study internationally — covering real student experiences with scholarships, visa applications, IELTS preparation, and life in the USA, UK, Canada, Australia, and beyond.
-        </p>
+        <p class="sub-desc">A podcast and content platform for Bangladeshi students aspiring to study internationally — covering real student experiences with scholarships, visa applications, IELTS preparation, and life in the USA, UK, Canada, Australia, and beyond.</p>
         <div class="sub-tags">
           <span class="sub-tag">Study Abroad</span>
           <span class="sub-tag">Scholarships</span>
@@ -236,7 +808,6 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
-
     </div>
   </div>
 </section>
@@ -245,7 +816,7 @@
 
 <!-- ═══ FOUNDERS ═══ -->
 <section class="section" id="founders" aria-label="Founding Members">
-  <div class="container">
+  <div class="wrap">
     <div class="founders-eyebrow rev">Founding Members</div>
     <h2 class="founders-h2 rev">The People<br>Behind <em>Prepway.</em></h2>
     <p class="founders-sub rev">Four individuals who came together with a shared belief — that every Bangladeshi student deserves better guidance, and that they could build it.</p>
@@ -256,7 +827,8 @@
         <div class="founder-name">Afrahim Siddiqui<br>Ahon</div>
         <div class="founder-role">Director, Prepway Group</div>
         <div class="founder-tags">
-          <span class="founder-tag">BANGLADESH</span>
+          <span class="founder-tag ftag-bd">BANGLADESH</span>
+          <span class="founder-tag">CONTENT</span>
         </div>
       </div>
       <div class="founder-card rev d1">
@@ -264,16 +836,26 @@
         <div class="founder-name">K. M. Rubaid<br>Ferdous Swapnil</div>
         <div class="founder-role">Director, Prepway Group</div>
         <div class="founder-tags">
+          <span class="founder-tag ftag-ab">ABROAD</span>
           <span class="founder-tag">CO-FOUNDER</span>
-          <span class="founder-tag">ABROAD</span>
         </div>
       </div>
       <div class="founder-card rev d2">
         <div class="founder-num">03</div>
+        <div class="founder-name">Zinat<br>Hossain Any</div>
+        <div class="founder-role">Founder, Prepway Abroad</div>
+        <div class="founder-tags">
+          <span class="founder-tag ftag-ab">ABROAD</span>
+          <span class="founder-tag">RESEARCH</span>
+        </div>
+      </div>
+      <div class="founder-card rev d3">
+        <div class="founder-num">04</div>
         <div class="founder-name">Md. Emran<br>Hasan Emon</div>
         <div class="founder-role">Director, Prepway Group</div>
         <div class="founder-tags">
-          <span class="founder-tag">BANGLADESH</span>
+          <span class="founder-tag ftag-bd">BANGLADESH</span>
+          <span class="founder-tag">GROWTH</span>
         </div>
       </div>
     </div>
@@ -284,14 +866,14 @@
 
 <!-- ═══ MISSION ═══ -->
 <section class="section" id="mission" aria-label="Our Mission">
-  <div class="container">
+  <div class="wrap">
     <div class="mission-inner">
       <div class="mission-eyebrow rev">Our Mission</div>
       <p class="mission-quote rev">
-        "From <em>Bangladesh,</em> to the world — and back again."
+        "Building Trust<br>for a <em>Better Tomorrow</em>"
       </p>
-      <p class="rev" style="font-family:var(--f-body);font-size:.97rem;color:var(--mid);line-height:1.85;max-width:580px;margin:0 auto 3rem">
-        We exist to close the guidance gap — to make sure that no student in Bangladesh has to navigate their most important decisions alone. Whether the goal is a merit list at BUET or an admission letter from a university abroad, Prepway Group is building the resources to get them there.
+      <p class="mission-sub rev">
+        No student in Bangladesh should have to navigate their most important decisions alone. Whether the goal is topping the medical merit list, cracking the BUET entrance, or earning a scholarship abroad — Prepway Group is building the trust and resources to get them there.
       </p>
       <a href="https://prepwaybd.vercel.app" target="_blank" rel="noopener" class="mission-cta rev">
         Explore Prepway Bangladesh
@@ -309,7 +891,8 @@
     <div class="ft-top">
       <div>
         <div class="ft-logo">Prepway Group</div>
-        <p class="ft-tagline">Building Trust for a Better Tomorrow</p>
+        <p class="ft-slogan">Building Trust for a Better Tomorrow</p>
+        <p class="ft-tagline">Empowering every Bangladeshi student — from home classrooms to universities around the world.</p>
       </div>
       <div>
         <div class="ft-col-title">Platforms</div>
@@ -330,7 +913,7 @@
       </div>
     </div>
     <div class="ft-bottom">
-      <div class="ft-copy">© 2026, Prepway Group. All rights reserved.</div>
+      <div class="ft-copy">© 2025 Prepway Group. All rights reserved.</div>
       <div class="ft-subs">
         <a href="https://prepwaybd.vercel.app" target="_blank" rel="noopener">Prepway Bangladesh</a>
         <span>·</span>
@@ -339,6 +922,101 @@
     </div>
   </div>
 </footer>
+
+<!-- Vercel Analytics -->
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+
+<script>
+'use strict';
+
+/* ── NAV SCROLL ── */
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 24);
+}, { passive: true });
+
+/* ── MOBILE MENU ── */
+const mbtn   = document.getElementById('mbtn');
+const mobNav = document.getElementById('mobileNav');
+let menuOpen = false;
+
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  mobNav.style.display = menuOpen ? 'block' : 'none';
+  requestAnimationFrame(() => mobNav.classList.toggle('open', menuOpen));
+  mbtn.setAttribute('aria-expanded', menuOpen);
+  mobNav.setAttribute('aria-hidden', !menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
+function closeMenu() {
+  menuOpen = false;
+  mobNav.classList.remove('open');
+  setTimeout(() => { if (!menuOpen) mobNav.style.display = 'none'; }, 300);
+  mbtn.setAttribute('aria-expanded', 'false');
+  mobNav.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+mbtn.addEventListener('click', toggleMenu);
+document.querySelectorAll('.mob-nav a').forEach(a => a.addEventListener('click', closeMenu));
+
+/* ── SCROLL REVEAL ── */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.07 });
+document.querySelectorAll('.rev').forEach(el => ro.observe(el));
+
+/* ── ANIMATED COUNTERS ── */
+function animCount(el) {
+  const target = parseInt(el.dataset.target, 10);
+  const dur = 1800, start = performance.now();
+  (function step(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target).toLocaleString();
+    if (p < 1) requestAnimationFrame(step);
+  })(start);
+}
+const co = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !e.target.dataset.counted) {
+      e.target.dataset.counted = '1';
+      animCount(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat-n[data-target]').forEach(el => co.observe(el));
+
+/* ── SMOOTH ANCHORS ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - 66, behavior: 'smooth' }); }
+  });
+});
+
+/* ── CUSTOM CURSOR (desktop) ── */
+if (window.matchMedia('(pointer:fine)').matches) {
+  const dot = document.createElement('div');
+  dot.style.cssText = 'position:fixed;width:8px;height:8px;border-radius:50%;background:#0D0D0D;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);mix-blend-mode:difference;';
+  const ring = document.createElement('div');
+  ring.style.cssText = 'position:fixed;width:34px;height:34px;border-radius:50%;border:1px solid rgba(13,13,13,.35);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s;';
+  document.body.appendChild(dot);
+  document.body.appendChild(ring);
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  (function animCursor() {
+    rx += (mx-rx)*.12; ry += (my-ry)*.12;
+    dot.style.left=mx+'px'; dot.style.top=my+'px';
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(animCursor);
+  })();
+  document.querySelectorAll('a,button').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.width='52px'; ring.style.height='52px'; ring.style.borderColor='rgba(13,13,13,.5)'; });
+    el.addEventListener('mouseleave', () => { ring.style.width='34px'; ring.style.height='34px'; ring.style.borderColor='rgba(13,13,13,.35)'; });
+  });
+}
+</script>
 
 <!-- Vercel Analytics -->
 <script defer src="/_vercel/insights/script.js"></script>
